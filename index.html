@@ -44,6 +44,16 @@ animation:netflix 3s forwards;
 100%{opacity:0; transform:scale(2);}
 }
 
+/* Star background */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.3;
+}
+
 /* Screens */
 
 .screen{
@@ -77,10 +87,20 @@ cursor:pointer;
 margin-top:20px;
 }
 
-img{
-width:250px;
+/* Photo slideshow */
+
+#slideshow{
+width:260px;
+height:260px;
 border-radius:20px;
+overflow:hidden;
 margin-top:20px;
+}
+
+#slideshow img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 /* Hearts */
@@ -124,6 +144,14 @@ animation:flash 1s infinite;
 
 <body>
 
+<div class="stars"></div>
+
+<!-- Music -->
+
+<audio id="music" autoplay loop>
+<source src="music.mp3" type="audio/mp3">
+</audio>
+
 <!-- Netflix Intro -->
 
 <div id="netflixIntro">
@@ -159,7 +187,9 @@ animation:flash 1s infinite;
 
 <p id="message"></p>
 
-<img src="photo1.jpeg">
+<div id="slideshow">
+<img id="slide" src="photo1.jpeg">
+</div>
 
 <br>
 
@@ -192,7 +222,7 @@ animation:flash 1s infinite;
 
 <script>
 
-/* Netflix intro hide */
+/* Netflix intro */
 
 setTimeout(()=>{
 document.getElementById("netflixIntro").style.display="none"
@@ -250,6 +280,24 @@ clearInterval(typing)
 },40)
 
 }
+
+/* Photo slideshow */
+
+let photos=["photo1.jpeg","photo2.jpeg","photo3.jpeg"]
+
+let index=0
+
+setInterval(()=>{
+
+index++
+
+if(index>=photos.length){
+index=0
+}
+
+document.getElementById("slide").src=photos[index]
+
+},3000)
 
 /* Proposal */
 
