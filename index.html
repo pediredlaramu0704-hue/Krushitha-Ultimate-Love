@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Ram ❤️ Krushitha</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff6a88,#ff99ac);
+}
+
+h1{font-size:70px;}
+
+button{
+padding:15px 40px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:red;
+color:white;
+cursor:pointer;
+}
+
+.section{display:none;padding:40px;}
+
+.slideshow img{
+width:90%;
+max-width:600px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+.message{
+max-width:700px;
+margin:auto;
+font-size:22px;
+line-height:1.6;
+margin-top:30px;
+}
+
+.timer{
+font-size:26px;
+margin-top:20px;
+}
+
+.heart{
+position:fixed;
+font-size:24px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
+
+.glow{
+font-size:50px;
+text-shadow:0 0 20px white,0 0 40px #ff4d6d;
+}
+
+textarea{
+width:80%;
+max-width:500px;
+height:120px;
+font-size:16px;
+padding:10px;
+border-radius:10px;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="hero">
+
+<h1>Krushitha ❤️</h1>
+<p>A special surprise from Ram</p>
+
+<button onclick="countdown()">Open Surprise</button>
+
+</div>
+
+<div id="countdown" class="section">
+<h1 id="count">3</h1>
+</div>
+
+<div id="story" class="section">
+
+<div class="slideshow">
+<img id="slide" src="photo1.jpg">
+</div>
+
+<div class="message" id="text"></div>
+
+<div class="timer" id="timer"></div>
+
+<br>
+
+<button onclick="proposal()">Continue</button>
+
+</div>
+
+<div id="proposal" class="section">
+
+<h1>Krushitha ❤️</h1>
+<h2>Will You Always Be Mine?</h2>
+
+<button onclick="celebrate()">YES ❤️</button>
+
+</div>
+
+<div id="final" class="section">
+
+<div class="glow">
+Ram ❤️ Krushitha  
+Forever & Always
+</div>
+
+<br><br>
+
+<h3>Leave a message for Ram 💌</h3>
+
+<textarea placeholder="Write something for Ram..."></textarea>
+
+<br><br>
+
+<button onclick="alert('Your love message is saved in Ram’s heart ❤️')">Send</button>
+
+</div>
+
+<script>
+
+let photos=["photo1.jpeg","photo2.jpeg","photo3.jpeg"];
+let index=0;
+
+function countdown(){
+
+document.querySelector(".hero").style.display="none";
+document.getElementById("countdown").style.display="block";
+
+let c=3;
+
+let interval=setInterval(function(){
+
+c--;
+document.getElementById("count").innerHTML=c;
+
+if(c==0){
+
+clearInterval(interval);
+
+document.getElementById("countdown").style.display="none";
+document.getElementById("story").style.display="block";
+
+start();
+
+}
+
+},1000);
+
+}
+
+function start(){
+
+slideshow();
+typeText();
+createHearts();
+startTimer();
+
+}
+
+function slideshow(){
+
+setInterval(function(){
+
+index++;
+
+if(index>=photos.length){
+index=0;
+}
+
+document.getElementById("slide").src=photos[index];
+
+},3000);
+
+}
+
+let text="Krushitha, every moment with you feels magical. Your smile lights up my world and your love makes my life complete. I promise my heart will always belong to you. Forever yours, Ram ❤️";
+
+let i=0;
+
+function typeText(){
+
+if(i<text.length){
+
+document.getElementById("text").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeText,40);
+
+}
+
+}
+
+function proposal(){
+
+document.getElementById("story").style.display="none";
+document.getElementById("proposal").style.display="block";
+
+}
+
+function celebrate(){
+
+document.getElementById("proposal").style.display="none";
+document.getElementById("final").style.display="block";
+
+createHearts();
+
+}
+
+function createHearts(){
+
+for(let i=0;i<80;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+function startTimer(){
+
+let startDate=new Date("2024-01-01");
+
+setInterval(function(){
+
+let now=new Date();
+
+let diff=now-startDate;
+
+let days=Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("timer").innerHTML=
+"❤️ Loving you for "+days+" days ❤️";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
