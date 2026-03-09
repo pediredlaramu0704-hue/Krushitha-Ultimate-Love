@@ -17,27 +17,35 @@ text-align:center;
 overflow:hidden;
 }
 
-#countdown{
-font-size:60px;
-margin-top:40vh;
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 }
 
 .hidden{
 display:none;
 }
 
-#main{
-padding-top:80px;
+h1{
+font-size:40px;
 }
 
 button{
 padding:15px 30px;
 font-size:20px;
-border:none;
 background:#ff4d6d;
 color:white;
+border:none;
 border-radius:10px;
 cursor:pointer;
+margin-top:20px;
 }
 
 img{
@@ -58,7 +66,6 @@ pointer-events:none;
 .heart{
 position:absolute;
 color:red;
-font-size:20px;
 animation:float 5s linear infinite;
 }
 
@@ -67,31 +74,71 @@ animation:float 5s linear infinite;
 100%{transform:translateY(-10vh)}
 }
 
+#fireworks{
+font-size:50px;
+animation:flash 1s infinite;
+}
+
+@keyframes flash{
+0%{opacity:1}
+50%{opacity:0.3}
+100%{opacity:1}
+}
+
+input{
+padding:10px;
+font-size:18px;
+border-radius:8px;
+border:none;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div id="countdown">3</div>
+<div class="hearts"></div>
 
-<div id="main" class="hidden">
+<!-- Cinematic intro -->
 
-<h1>Ram ❤️ Krushitha</h1>
+<div id="intro" class="screen">
 
-<h2>Our Love Story</h2>
+<h1>A Love Story</h1>
 
-<p id="message"></p>
+<h2>Ram ❤️ Krushitha</h2>
 
-<img src="photo1.jpeg">
-
-<br><br>
-
-<button onclick="proposal()">Click For A Surprise 💖</button>
+<button onclick="startCountdown()">Start</button>
 
 </div>
 
-<div id="proposal" class="hidden">
+<!-- Countdown -->
+
+<div id="countdown" class="screen hidden">
+
+<h1 id="timer">3</h1>
+
+</div>
+
+<!-- Main Story -->
+
+<div id="story" class="screen hidden">
+
+<h1>Our Love Story</h1>
+
+<p id="message"></p>
+
+<img id="photo" src="photo1.jpg">
+
+<br>
+
+<button onclick="proposal()">Continue</button>
+
+</div>
+
+<!-- Proposal -->
+
+<div id="proposal" class="screen hidden">
 
 <h1>Krushitha 💍</h1>
 
@@ -101,30 +148,44 @@ animation:float 5s linear infinite;
 
 </div>
 
-<div id="celebration" class="hidden">
+<!-- Celebration Screen -->
+
+<div id="celebration" class="screen hidden">
+
+<h1 id="fireworks">🎆🎆🎆</h1>
 
 <h1>Ram ❤️ Krushitha Forever</h1>
 
-<h2>Our Love Story Has Just Begun ✨</h2>
+<h2>Our Love Story Will Never End</h2>
+
+<p>Send a message to Ram 💌</p>
+
+<input placeholder="Type your reply here">
 
 </div>
 
-<div class="hearts"></div>
-
 <script>
 
+function startCountdown(){
+
+document.getElementById("intro").classList.add("hidden")
+document.getElementById("countdown").classList.remove("hidden")
+
 let count=3
+
 let timer=setInterval(()=>{
+
 count--
-document.getElementById("countdown").innerText=count
+
+document.getElementById("timer").innerText=count
 
 if(count==0){
 
 clearInterval(timer)
 
-document.getElementById("countdown").style.display="none"
+document.getElementById("countdown").classList.add("hidden")
 
-document.getElementById("main").classList.remove("hidden")
+document.getElementById("story").classList.remove("hidden")
 
 startTyping()
 
@@ -132,7 +193,9 @@ startTyping()
 
 },1000)
 
-let text="Krushitha, out of billions of people in this world... my heart chose you. You are my happiness, my peace, and my forever love."
+}
+
+let text="Krushitha, out of billions of people in the world, my heart chose you. You are my happiness, my peace, and my forever love."
 
 let i=0
 
@@ -156,7 +219,7 @@ clearInterval(typing)
 
 function proposal(){
 
-document.getElementById("main").classList.add("hidden")
+document.getElementById("story").classList.add("hidden")
 
 document.getElementById("proposal").classList.remove("hidden")
 
@@ -179,6 +242,8 @@ heart.className="heart"
 heart.innerHTML="❤️"
 
 heart.style.left=Math.random()*100+"%"
+
+heart.style.fontSize=Math.random()*20+10+"px"
 
 heart.style.animationDuration=Math.random()*3+3+"s"
 
