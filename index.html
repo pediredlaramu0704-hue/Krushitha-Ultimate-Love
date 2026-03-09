@@ -2,86 +2,69 @@
 <html>
 <head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ram ❤️ Krushitha</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Segoe UI;
+font-family:Arial;
 background:black;
 color:white;
 text-align:center;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff6a88,#ff99ac);
+#countdown{
+font-size:60px;
+margin-top:40vh;
 }
 
-h1{font-size:70px;}
+.hidden{
+display:none;
+}
+
+#main{
+padding-top:80px;
+}
 
 button{
-padding:15px 40px;
+padding:15px 30px;
 font-size:20px;
 border:none;
-border-radius:10px;
-background:red;
+background:#ff4d6d;
 color:white;
+border-radius:10px;
 cursor:pointer;
 }
 
-.section{display:none;padding:40px;}
-
-.slideshow img{
-width:90%;
-max-width:600px;
+img{
+width:250px;
 border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-.message{
-max-width:700px;
-margin:auto;
-font-size:22px;
-line-height:1.6;
-margin-top:30px;
-}
-
-.timer{
-font-size:26px;
 margin-top:20px;
 }
 
-.heart{
+.hearts{
 position:fixed;
-font-size:24px;
-animation:fall linear infinite;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh);}
-100%{transform:translateY(110vh);}
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:float 5s linear infinite;
 }
 
-.glow{
-font-size:50px;
-text-shadow:0 0 20px white,0 0 40px #ff4d6d;
-}
-
-textarea{
-width:80%;
-max-width:500px;
-height:120px;
-font-size:16px;
-padding:10px;
-border-radius:10px;
-border:none;
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
 }
 
 </style>
@@ -90,202 +73,124 @@ border:none;
 
 <body>
 
-<audio autoplay loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
+<div id="countdown">3</div>
 
-<div class="hero">
+<div id="main" class="hidden">
 
-<h1>Krushitha ❤️</h1>
-<p>A special surprise from Ram</p>
+<h1>Ram ❤️ Krushitha</h1>
 
-<button onclick="countdown()">Open Surprise</button>
+<h2>Our Love Story</h2>
 
-</div>
+<p id="message"></p>
 
-<div id="countdown" class="section">
-<h1 id="count">3</h1>
-</div>
+<img src="photo1.jpeg">
 
-<div id="story" class="section">
+<br><br>
 
-<div class="slideshow">
-<img id="slide" src="photo1.jpg">
-</div>
-
-<div class="message" id="text"></div>
-
-<div class="timer" id="timer"></div>
-
-<br>
-
-<button onclick="proposal()">Continue</button>
+<button onclick="proposal()">Click For A Surprise 💖</button>
 
 </div>
 
-<div id="proposal" class="section">
+<div id="proposal" class="hidden">
 
-<h1>Krushitha ❤️</h1>
-<h2>Will You Always Be Mine?</h2>
+<h1>Krushitha 💍</h1>
+
+<h2>Will you stay with me forever?</h2>
 
 <button onclick="celebrate()">YES ❤️</button>
 
 </div>
 
-<div id="final" class="section">
+<div id="celebration" class="hidden">
 
-<div class="glow">
-Ram ❤️ Krushitha  
-Forever & Always
-</div>
+<h1>Ram ❤️ Krushitha Forever</h1>
 
-<br><br>
-
-<h3>Leave a message for Ram 💌</h3>
-
-<textarea placeholder="Write something for Ram..."></textarea>
-
-<br><br>
-
-<button onclick="alert('Your love message is saved in Ram’s heart ❤️')">Send</button>
+<h2>Our Love Story Has Just Begun ✨</h2>
 
 </div>
+
+<div class="hearts"></div>
 
 <script>
 
-let photos=["photo1.jpeg","photo2.jpeg"];
-let index=0;
+let count=3
+let timer=setInterval(()=>{
+count--
+document.getElementById("countdown").innerText=count
 
-function countdown(){
+if(count==0){
 
-document.querySelector(".hero").style.display="none";
-document.getElementById("countdown").style.display="block";
+clearInterval(timer)
 
-let c=3;
+document.getElementById("countdown").style.display="none"
 
-let interval=setInterval(function(){
+document.getElementById("main").classList.remove("hidden")
 
-c--;
-document.getElementById("count").innerHTML=c;
-
-if(c==0){
-
-clearInterval(interval);
-
-document.getElementById("countdown").style.display="none";
-document.getElementById("story").style.display="block";
-
-start();
+startTyping()
 
 }
 
-},1000);
+},1000)
+
+let text="Krushitha, out of billions of people in this world... my heart chose you. You are my happiness, my peace, and my forever love."
+
+let i=0
+
+function startTyping(){
+
+let typing=setInterval(()=>{
+
+document.getElementById("message").innerHTML+=text[i]
+
+i++
+
+if(i==text.length){
+
+clearInterval(typing)
 
 }
 
-function start(){
-
-slideshow();
-typeText();
-createHearts();
-startTimer();
-
-}
-
-function slideshow(){
-
-setInterval(function(){
-
-index++;
-
-if(index>=photos.length){
-index=0;
-}
-
-document.getElementById("slide").src=photos[index];
-
-},3000);
-
-}
-
-let text="Krushitha, every moment with you feels magical. Your smile lights up my world and your love makes my life complete. I promise my heart will always belong to you. Forever yours, Ram ❤️";
-
-let i=0;
-
-function typeText(){
-
-if(i<text.length){
-
-document.getElementById("text").innerHTML+=text.charAt(i);
-
-i++;
-
-setTimeout(typeText,40);
-
-}
+},40)
 
 }
 
 function proposal(){
 
-document.getElementById("story").style.display="none";
-document.getElementById("proposal").style.display="block";
+document.getElementById("main").classList.add("hidden")
+
+document.getElementById("proposal").classList.remove("hidden")
 
 }
 
 function celebrate(){
 
-document.getElementById("proposal").style.display="none";
-document.getElementById("final").style.display="block";
+document.getElementById("proposal").classList.add("hidden")
 
-createHearts();
-
-}
-
-function createHearts(){
-
-for(let i=0;i<80;i++){
-
-let heart=document.createElement("div");
-
-heart.className="heart";
-
-heart.innerHTML="❤️";
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.animationDuration=(Math.random()*3+2)+"s";
-
-document.body.appendChild(heart);
+document.getElementById("celebration").classList.remove("hidden")
 
 }
 
-}
+function createHeart(){
 
-function startTimer(){
+const heart=document.createElement("div")
 
-let startDate=new Date("2024-01-01");
+heart.className="heart"
 
-setInterval(function(){
+heart.innerHTML="❤️"
 
-let now=new Date();
+heart.style.left=Math.random()*100+"%"
 
-let diff=now-startDate;
+heart.style.animationDuration=Math.random()*3+3+"s"
 
-let days=Math.floor(diff/(1000*60*60*24));
+document.querySelector(".hearts").appendChild(heart)
 
-document.getElementById("timer").innerHTML=
-"❤️ Loving you for "+days+" days ❤️";
-
-},1000);
+setTimeout(()=>{heart.remove()},5000)
 
 }
+
+setInterval(createHeart,200)
 
 </script>
 
 </body>
-
 </html>
-
-
-
