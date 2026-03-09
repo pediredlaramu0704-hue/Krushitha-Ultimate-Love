@@ -83,14 +83,6 @@ border-radius:20px;
 margin-top:20px;
 }
 
-input{
-padding:10px;
-font-size:18px;
-border-radius:8px;
-border:none;
-margin-top:10px;
-}
-
 /* Hearts */
 
 .hearts{
@@ -196,14 +188,6 @@ animation:flash 1s infinite;
 
 <h2>Our Love Story Will Never End</h2>
 
-<p>Send a message to Ram 💌</p>
-
-<input id="reply" placeholder="Type your message">
-
-<br>
-
-<button onclick="sendMessage()">Send ❤️</button>
-
 </div>
 
 <script>
@@ -282,23 +266,6 @@ function celebrate(){
 
 document.getElementById("proposal").classList.add("hidden")
 document.getElementById("celebration").classList.remove("hidden")
-
-}
-
-/* Send message */
-
-function sendMessage(){
-
-let msg=document.getElementById("reply").value
-
-if(msg==""){
-alert("Write something for Ram ❤️")
-return
-}
-
-let subject="Message from Krushitha ❤️"
-
-window.location.href="mailto:pediredlaramu0704@gmail.com?subject="+subject+"&body="+msg
 
 }
 
