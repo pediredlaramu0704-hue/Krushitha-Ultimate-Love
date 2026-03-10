@@ -203,10 +203,12 @@ animation:flash 1s infinite;
 <h1 id="fireworks">🎆🎆🎆</h1>
 
 <h1>Ram ❤️ Krushitha Forever</h1>
+
 <h2>Our Love Story Will Never End</h2>
 
-</div>
+<h3 id="loveTimer"></h3>
 
+</div>
 <script>
 
 /* Netflix intro */
@@ -302,6 +304,9 @@ function celebrate(){
 document.getElementById("proposal").classList.add("hidden")
 document.getElementById("celebration").classList.remove("hidden")
 
+heartExplosion()
+startLoveTimer()
+
 }
 
 /* Floating hearts */
@@ -335,7 +340,57 @@ navigator.serviceWorker.register("service-worker.js")
 .then(()=>console.log("Service Worker Registered"))
 }
 
+/* Heart Explosion */
+
+function heartExplosion(){
+
+for(let i=0;i<80;i++){
+
+const heart=document.createElement("div")
+
+heart.innerHTML="❤️"
+
+heart.style.position="fixed"
+heart.style.left=Math.random()*100+"%"
+heart.style.top=Math.random()*100+"%"
+heart.style.fontSize=Math.random()*30+20+"px"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},3000)
+
+}
+
+}
+
+/* Love Timer */
+
+const loveStartDate=new Date("2025-04-07") // change to your real date
+
+function startLoveTimer(){
+
+setInterval(()=>{
+
+const now=new Date()
+
+const diff=now-loveStartDate
+
+const days=Math.floor(diff/(1000*60*60*24))
+const hours=Math.floor((diff/(1000*60*60))%24)
+const minutes=Math.floor((diff/(1000*60))%60)
+
+document.getElementById("loveTimer").innerHTML=
+"Together for ❤️ <br>"+days+" Days "+hours+" Hours "+minutes+" Minutes"
+
+},1000)
+
+}
+
+  
 </script>
 
 </body>
 </html>
+
