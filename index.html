@@ -42,6 +42,20 @@ letter-spacing:5px;
 animation:netflix 3s forwards;
 }
 
+@keyframes explode {
+
+0%{
+transform:scale(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-200px) scale(2);
+opacity:0;
+}
+
+}
+  
 @keyframes netflix{
 0%{opacity:0; transform:scale(0.5);}
 50%{opacity:1; transform:scale(1.2);}
@@ -344,22 +358,27 @@ navigator.serviceWorker.register("service-worker.js")
 
 function heartExplosion(){
 
-for(let i=0;i<80;i++){
+for(let i=0;i<60;i++){
 
 const heart=document.createElement("div")
 
 heart.innerHTML="❤️"
 
 heart.style.position="fixed"
-heart.style.left=Math.random()*100+"%"
-heart.style.top=Math.random()*100+"%"
-heart.style.fontSize=Math.random()*30+20+"px"
+heart.style.left="50%"
+heart.style.top="50%"
+heart.style.fontSize="25px"
+
+heart.style.animation="explode 2s forwards"
+
+heart.style.transform=
+"translate("+(Math.random()*400-200)+"px,"+(Math.random()*400-200)+"px)"
 
 document.body.appendChild(heart)
 
 setTimeout(()=>{
 heart.remove()
-},3000)
+},2000)
 
 }
 
