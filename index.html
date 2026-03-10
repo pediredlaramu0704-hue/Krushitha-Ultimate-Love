@@ -143,6 +143,20 @@ animation:float 5s linear infinite;
 100%{transform:translateY(-10vh)}
 }
 
+@keyframes heartbeat{
+
+0%{transform:scale(1)}
+25%{transform:scale(1.1)}
+50%{transform:scale(1)}
+75%{transform:scale(1.1)}
+100%{transform:scale(1)}
+
+}
+
+#proposal h1{
+animation:heartbeat 1.5s infinite;
+}
+
 /* Fireworks */
 
 #fireworks{
@@ -154,6 +168,15 @@ animation:flash 1s infinite;
 0%{opacity:1}
 50%{opacity:0.3}
 100%{opacity:1}
+}
+
+#fireworksCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
 }
 
 </style>
@@ -214,7 +237,7 @@ animation:flash 1s infinite;
 
 <div id="celebration" class="screen hidden">
 
-<h1 id="fireworks">🎆🎆🎆</h1>
+<canvas id="fireworksCanvas"></canvas>
 
 <h1>Ram ❤️ Krushitha Forever</h1>
 
@@ -358,7 +381,7 @@ navigator.serviceWorker.register("service-worker.js")
 
 function heartExplosion(){
 
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
 
 const heart=document.createElement("div")
 
@@ -367,14 +390,19 @@ heart.innerHTML="❤️"
 heart.style.position="fixed"
 heart.style.left="50%"
 heart.style.top="50%"
-heart.style.fontSize="25px"
+heart.style.fontSize=Math.random()*30+20+"px"
 
-heart.style.animation="explode 2s forwards"
-
-heart.style.transform=
-"translate("+(Math.random()*400-200)+"px,"+(Math.random()*400-200)+"px)"
+heart.style.transition="all 2s ease-out"
 
 document.body.appendChild(heart)
+
+let x=(Math.random()-0.5)*600
+let y=(Math.random()-0.5)*600
+
+setTimeout(()=>{
+heart.style.transform=`translate(${x}px, ${y}px)`
+heart.style.opacity="0"
+},10)
 
 setTimeout(()=>{
 heart.remove()
@@ -407,11 +435,65 @@ document.getElementById("loveTimer").innerHTML=
 
 }
 
+const canvas=document.getElementById("fireworksCanvas")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+function createFirework(){
+
+let x=Math.random()*canvas.width
+let y=Math.random()*canvas.height/2
+
+for(let i=0;i<80;i++){
+
+particles.push({
+x:x,
+y:y,
+vx:(Math.random()-0.5)*5,
+vy:(Math.random()-0.5)*5,
+life:100
+})
+
+}
+
+}
+
+function updateFireworks(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach((p,index)=>{
+
+p.x+=p.vx
+p.y+=p.vy
+p.life--
+
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)"
+ctx.fillRect(p.x,p.y,3,3)
+
+if(p.life<=0){
+particles.splice(index,1)
+}
+
+})
+
+requestAnimationFrame(updateFireworks)
+
+}
+
+setInterval(createFirework,800)
+
+updateFireworks()
   
 </script>
 
 </body>
 </html>
+
 
 
 
