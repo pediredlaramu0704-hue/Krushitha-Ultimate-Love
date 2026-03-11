@@ -179,6 +179,17 @@ height:100%;
 pointer-events:none;
 }
 
+.hiddenSecret{
+opacity:0;
+transition:opacity 2s;
+margin-top:30px;
+color:#ff4d6d;
+}
+
+.showSecret{
+opacity:1;
+}
+  
 </style>
 
 </head>
@@ -244,6 +255,11 @@ pointer-events:none;
 <h2>Our Love Story Will Never End</h2>
 
 <h3 id="loveTimer"></h3>
+
+<h2 id="secretMessage" class="hiddenSecret">
+💍 Krushitha… one day this will not be a website.
+It will be our real story forever. ❤️
+</h2>
 
 </div>
 <script>
@@ -488,11 +504,28 @@ requestAnimationFrame(updateFireworks)
 setInterval(createFirework,800)
 
 updateFireworks()
+
+let tapCount=0
+
+document.addEventListener("click",function(){
+
+if(document.getElementById("celebration").classList.contains("hidden")) return
+
+tapCount++
+
+if(tapCount>=5){
+
+document.getElementById("secretMessage").classList.add("showSecret")
+
+}
+
+})
   
 </script>
 
 </body>
 </html>
+
 
 
 
