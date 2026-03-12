@@ -142,6 +142,59 @@ animation:flash 1s infinite;
 100%{opacity:1}
 }
 
+/* Heart Explosion */
+
+function heartExplosion(){
+
+for(let i=0;i<60;i++){
+
+const heart=document.createElement("div")
+
+heart.innerHTML="❤️"
+
+heart.style.position="fixed"
+heart.style.left="50%"
+heart.style.top="50%"
+heart.style.fontSize="25px"
+
+heart.style.animation="explode 2s forwards"
+
+heart.style.transform=
+"translate("+(Math.random()*400-200)+"px,"+(Math.random()*400-200)+"px)"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>{
+heart.remove()
+},2000)
+
+}
+
+}
+
+/* Love Timer */
+
+const loveStartDate=new Date("2024-01-01") // change to your real date
+
+function startLoveTimer(){
+
+setInterval(()=>{
+
+const now=new Date()
+
+const diff=now-loveStartDate
+
+const days=Math.floor(diff/(1000*60*60*24))
+const hours=Math.floor((diff/(1000*60*60))%24)
+const minutes=Math.floor((diff/(1000*60))%60)
+
+document.getElementById("loveTimer").innerHTML=
+"Together for ❤️ <br>"+days+" Days "+hours+" Hours "+minutes+" Minutes"
+
+},1000)
+
+}
+
 </style>
 
 </head>
@@ -393,4 +446,5 @@ document.getElementById("loveTimer").innerHTML=
 
 </body>
 </html>
+
 
