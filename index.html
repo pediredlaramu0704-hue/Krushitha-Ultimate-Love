@@ -358,7 +358,9 @@ function updateFireworks(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-particles.forEach((p,index)=>{
+for(let i=particles.length-1;i>=0;i--){
+
+let p=particles[i]
 
 p.x+=p.vx
 p.y+=p.vy
@@ -368,11 +370,10 @@ ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)"
 ctx.fillRect(p.x,p.y,3,3)
 
 if(p.life<=0){
-particles.splice(index,1)
+particles.splice(i,1)
 }
 
-})
-
+}
 requestAnimationFrame(updateFireworks)
 
 }
@@ -703,6 +704,7 @@ noBtn.style.top=y+"px"
 
 </body>
 </html>
+
 
 
 
