@@ -168,6 +168,19 @@ animation:shake 2s infinite;
 75%{transform:translateX(-2px)}
 100%{transform:translateX(0)}
 }
+
+#proposalFlash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+opacity:0;
+pointer-events:none;
+transition:opacity 0.2s;
+z-index:9999;
+}
   
 </style>
 </head>
@@ -187,7 +200,7 @@ animation:shake 2s infinite;
 <h2>Ram ❤️ Krushitha</h2>
 <button onclick="startCountdown()">Start</button>
 </div>
-
+<div id="proposalFlash"></div>
 <div id="countdown" class="screen hidden">
 <h1 id="timer">3</h1>
 </div>
@@ -297,6 +310,8 @@ document.getElementById("proposal").classList.remove("hidden")
 /* celebration */
 
 function celebrate(){
+
+proposalMoment()   // new effect
 
 document.getElementById("proposal").classList.add("hidden")
 document.getElementById("celebration").classList.remove("hidden")
@@ -542,10 +557,39 @@ noBtn.style.top=y+"px"
 
 }
 
+function proposalMoment(){
+
+/* Screen flash */
+
+const flash = document.getElementById("proposalFlash")
+
+flash.style.opacity = "1"
+
+setTimeout(()=>{
+flash.style.opacity = "0"
+},200)
+
+/* Heartbeat vibration */
+
+if(navigator.vibrate){
+
+navigator.vibrate([
+200,100,
+200,100,
+400,150,
+200,100,
+200
+])
+
+}
+
+}
+  
 </script>
 
 </body>
 </html>
+
 
 
 
