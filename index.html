@@ -611,12 +611,18 @@ const index=(y*imageData.width+x)*4
 
 if(imageData.data[index+3]>128){
 
-heartParticles.push({
-x:Math.random()*heartCanvas.width,
-y:Math.random()*heartCanvas.height,
-tx:x,
-ty:y
+heartParticles.forEach(p=>{
+particles.push({
+x:p.x,
+y:p.y,
+vx:(Math.random()-0.5)*8,
+vy:(Math.random()-0.5)*8,
+life:120
 })
+})
+
+/* clear heart particles */
+heartParticles.length = 0
 
 }
 
@@ -697,6 +703,7 @@ noBtn.style.top=y+"px"
 
 </body>
 </html>
+
 
 
 
