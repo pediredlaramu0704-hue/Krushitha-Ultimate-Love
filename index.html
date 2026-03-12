@@ -358,26 +358,27 @@ function updateFireworks(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-for(let i=particles.length-1;i>=0;i--){
+for(let i = particles.length - 1; i >= 0; i--){
 
-let p=particles[i]
+let p = particles[i]
 
-p.x+=p.vx
-p.y+=p.vy
+p.x += p.vx
+p.y += p.vy
 p.life--
 
-ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)"
+ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)"
 ctx.fillRect(p.x,p.y,3,3)
 
-if(p.life<=0){
+if(p.life <= 0){
 particles.splice(i,1)
 }
 
 }
+
 requestAnimationFrame(updateFireworks)
 
 }
-
+  
 setInterval(createFirework,800)
 
 updateFireworks()
@@ -638,47 +639,67 @@ function animateHeartSky(){
 
 heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
 
-heartParticles.forEach(p=>{
+for(let i=0;i<heartParticles.length;i++){
+
+let p = heartParticles[i]
 
 p.x += (p.tx - p.x) * 0.05
 p.y += (p.ty - p.y) * 0.05
 
-heartCtx.font="14px Arial"
-heartCtx.shadowColor="red"
-heartCtx.shadowBlur=20
+heartCtx.font="16px Arial"
 heartCtx.fillText("❤️",p.x,p.y)
 
-})
-
-if(!heartStartTime){
-heartStartTime = Date.now()
 }
 
-let elapsed = Date.now() - heartStartTime
+if(!heartStart){
+heartStart = Date.now()
+}
 
-/* after 5 seconds explode */
+let elapsed = Date.now() - heartStart
 
-if(elapsed > 5000 && !exploded){
+/* stay 5 seconds */
+
+if(elapsed < 5000){
+requestAnimationFrame(animateHeartSky)
+return
+}
+
+/* explode once */
+
+if(!exploded){
 
 exploded = true
 
-heartParticles.forEach(p=>{
+for(let i=0;i<heartParticles.length;i++){
+
+let p = heartParticles[i]
+
 particles.push({
 x:p.x,
 y:p.y,
 vx:(Math.random()-0.5)*8,
 vy:(Math.random()-0.5)*8,
-life:120
-})
+life:80
 })
 
+}
+
 heartParticles = []
+
+}
+
+/* stop drawing hearts */
+
 }
 
 requestAnimationFrame(animateHeartSky)
 
 }
 function startHeartSky(){
+
+heartParticles = []
+heartStart = null
+exploded = false
 
 createHeartName()
 animateHeartSky()
@@ -701,11 +722,21 @@ noBtn.style.top=y+"px"
 
 }
 
+window.addEventListener("resize",()=>{
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+heartCanvas.width = window.innerWidth
+heartCanvas.height = window.innerHeight
+
+})  
   
 </script>
 
 </body>
 </html>
+
 
 
 
