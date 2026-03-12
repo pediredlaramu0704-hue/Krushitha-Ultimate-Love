@@ -1,153 +1,274 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ram ❤️ Krushitha</title>
+<!DOCTYPE html>  
+<html>  
+<head>  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<link rel="manifest" href="manifest.json">  
+<meta name="theme-color" content="#ff4d6d">  
+<link rel="apple-touch-icon" href="icon.png">  <title>Welcome 🤗</title>  <style>  
+  
+body{  
+margin:0;  
+font-family:Arial;  
+background:black;  
+color:white;  
+text-align:center;  
+overflow:hidden;  
+}  
+  
+/* Netflix intro */  
+  
+#netflixIntro{  
+position:fixed;  
+top:0;  
+left:0;  
+width:100%;  
+height:100%;  
+background:black;  
+display:flex;  
+justify-content:center;  
+align-items:center;  
+z-index:9999;  
+}  
+  
+.logo{  
+font-size:50px;  
+color:red;  
+letter-spacing:5px;  
+animation:netflix 3s forwards;  
+}  
+  
+@keyframes explode {  
+  
+0%{  
+transform:scale(0);  
+opacity:1;  
+}  
+  
+100%{  
+transform:translateY(-200px) scale(2);  
+opacity:0;  
+}  
+  
+}  
+    
+@keyframes netflix{  
+0%{opacity:0; transform:scale(0.5);}  
+50%{opacity:1; transform:scale(1.2);}  
+100%{opacity:0; transform:scale(2);}  
+}  
+  
+/* Star background */  
+  
+.stars{  
+position:fixed;  
+width:100%;  
+height:100%;  
+background:url("https://www.transparenttextures.com/patterns/stardust.png");  
+opacity:0.3;  
+}  
+  
+/* Screens */  
+  
+.screen{  
+position:absolute;  
+width:100%;  
+height:100%;  
+top:0;  
+left:0;  
+display:flex;  
+flex-direction:column;  
+justify-content:center;  
+align-items:center;  
+}  
+  
+.hidden{  
+display:none;  
+}  
+  
+h1{  
+font-size:40px;  
+}  
+  
+button{  
+padding:15px 30px;  
+font-size:20px;  
+background:#ff4d6d;  
+color:white;  
+border:none;  
+border-radius:10px;  
+cursor:pointer;  
+margin-top:20px;  
+}  
+  
+/* Photo slideshow */  
+  
+#slideshow{  
+width:260px;  
+height:260px;  
+border-radius:20px;  
+overflow:hidden;  
+margin-top:20px;  
+}  
+  
+#slideshow img{  
+width:100%;  
+height:100%;  
+object-fit:cover;  
+}  
+  
+/* Hearts */  
+  
+.hearts{  
+position:fixed;  
+top:0;  
+left:0;  
+width:100%;  
+height:100%;  
+pointer-events:none;  
+}  
+  
+.heart{  
+position:absolute;  
+color:red;  
+animation:float 5s linear infinite;  
+}  
+  
+@keyframes float{  
+0%{transform:translateY(100vh)}  
+100%{transform:translateY(-10vh)}  
+}  
+  
+@keyframes heartbeat{  
+  
+0%{transform:scale(1)}  
+25%{transform:scale(1.1)}  
+50%{transform:scale(1)}  
+75%{transform:scale(1.1)}  
+100%{transform:scale(1)}  
+  
+}  
+  
+#proposal h1{  
+animation:heartbeat 1.5s infinite;  
+}  
+  
+/* Fireworks */  
+  
+#fireworks{  
+font-size:60px;  
+animation:flash 1s infinite;  
+}  
+  
+@keyframes flash{  
+0%{opacity:1}  
+50%{opacity:0.3}  
+100%{opacity:1}  
+}  
+  
+#fireworksCanvas{  
+position:fixed;  
+top:0;  
+left:0;  
+width:100%;  
+height:100%;  
+pointer-events:none;  
+}  
+  
+.hiddenSecret{  
+opacity:0;  
+transition:opacity 2s;  
+margin-top:30px;  
+color:#ff4d6d;  
+font-size:22px;  
+max-width:300px;  
+text-align:center;  
+}  
+  
+.showSecret{  
+opacity:1;  
+}  
+  
+#heartSky{  
+position:fixed;  
+top:0;  
+left:0;  
+width:100%;  
+height:100%;  
+pointer-events:none;  
+}  
+  
+#noBtn{  
+position:relative;  
+background:#444;  
+margin-left:10px;  
+}  
+  
+#secretArea{  
+margin-top:60px;  
+text-align:center;  
+}  
+  
+#secretBtn{  
+padding:12px 20px;  
+font-size:18px;  
+cursor:pointer;  
+}  
+  
+#secretContent{  
+display:none;  
+margin-top:20px;  
+font-size:20px;  
+color:#ff4d6d;  
+animation:fadeIn 1s;  
+}  
+    
+</style>  </head>  <body>  <div class="stars"></div>  <audio id="music" autoplay loop>  
+<source src="music.mp3" type="audio/mp3">  
+</audio>  <div id="netflixIntro">  
+<h1 class="logo">WELCOME 🤗❤️</h1>  
+</div>  <div class="hearts"></div>  <div id="intro" class="screen">  <h1>A Love Story</h1>  
+<h2>Ram ❤️ Krushitha</h2>  <button onclick="startCountdown()">Start</button>
 
-<style>
+</div>  <div id="countdown" class="screen hidden">  
+<h1 id="timer">3</h1>  
+</div>  <div id="story" class="screen hidden">  <h1>Our Love Story</h1>  <p id="message"></p>  <div id="slideshow">  
+<img id="slide" src="photo1.jpeg">  
+</div>  <br>  <button onclick="proposal()">Continue</button>
 
-body{
-margin:0;
-font-family:Arial;
-background:black;
-color:white;
-text-align:center;
-overflow:hidden;
-}
-
-/* screens */
-
-.screen{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
-
-.hidden{
-display:none;
-}
-
-/* hearts */
-
-.hearts{
-position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
-}
-
-.heart{
-position:absolute;
-animation:float 5s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh)}
-100%{transform:translateY(-10vh)}
-}
-
-button{
-padding:15px 30px;
-font-size:20px;
-background:#ff4d6d;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-margin-top:20px;
-}
-
-#noBtn{
-background:#555;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="hearts"></div>
-
-<!-- INTRO -->
-
-<div id="intro" class="screen">
-
-<h1>Ram ❤️ Krushitha</h1>
-<h2>A Love Story</h2>
-
-<button onclick="startCountdown()">Start</button>
-
-</div>
-
-<!-- COUNTDOWN -->
-
-<div id="countdown" class="screen hidden">
-
-<h1 id="timer">3</h1>
-
-</div>
-
-<!-- STORY -->
-
-<div id="story" class="screen hidden">
-
-<h1>Our Love Story</h1>
-<p id="message"></p>
-
-<button onclick="showProposal()">Continue</button>
-
-</div>
-
-<!-- PROPOSAL -->
-
-<div id="proposal" class="screen hidden">
-
-<h1>Krushitha 💍</h1>
-<h2>Will you stay with me forever?</h2>
-
-<button onclick="celebrate()">YES ❤️</button>
+</div>  <div id="proposal" class="screen hidden">  <h1>Krushitha 💍</h1>  
+<h2>Will you stay with me forever?</h2>  <button onclick="celebrate()">YES ❤️</button>
 <button id="noBtn">NO 😢</button>
 
-</div>
+</div>  <div id="celebration" class="screen hidden">  <canvas id="fireworksCanvas"></canvas>
+<canvas id="heartSky"></canvas>
 
-<!-- CELEBRATION -->
+<h1>Ram ❤️ Krushitha</h1>  
+<h2>Our Love Story Will Never End</h2>  
+<h3 id="loveTimer"></h3>  <h2 id="secretMessage" class="hiddenSecret">  
+💍 Krushitha… one day this will not be a website.  
+It will be our real story forever. ❤️  
+</h2>  <div id="secretArea">  <button id="secretBtn">Tap me more... 👀</button>
 
-<div id="celebration" class="screen hidden">
+<div id="secretContent">  
+💖 Secret Message For Krushitha 💖  If you found this...
+it means you explored my whole love website.
 
-<h1>Ram ❤️ Krushitha Forever</h1>
-<h2 id="loveTimer"></h2>
+And I want you to know...
 
-</div>
+I will always choose you.
+Today.
+Tomorrow.
+Forever.
 
-<script>
+– Ram ❤️
 
-/* floating hearts */
+</div>  </div>  </div>  
+<script>  /* Netflix intro */
 
-function createHeart(){
+setTimeout(()=>{
+document.getElementById("netflixIntro").style.display="none"
+},3000)
 
-const heart=document.createElement("div")
-
-heart.className="heart"
-heart.innerHTML="❤️"
-
-heart.style.left=Math.random()*100+"%"
-heart.style.fontSize=Math.random()*20+10+"px"
-
-document.querySelector(".hearts").appendChild(heart)
-
-setTimeout(()=>{heart.remove()},5000)
-
-}
-
-setInterval(createHeart,300)
-
-/* countdown */
+/* Countdown */
 
 function startCountdown(){
 
@@ -156,7 +277,7 @@ document.getElementById("countdown").classList.remove("hidden")
 
 let count=3
 
-const timer=setInterval(()=>{
+let timer=setInterval(()=>{
 
 count--
 
@@ -167,6 +288,7 @@ if(count==0){
 clearInterval(timer)
 
 document.getElementById("countdown").classList.add("hidden")
+
 document.getElementById("story").classList.remove("hidden")
 
 startTyping()
@@ -177,21 +299,21 @@ startTyping()
 
 }
 
-/* typing message */
+/* Typing Love Message */
 
-const text="Krushitha, out of billions of people in the world... my heart chose you."
+let text="Krushitha, out of billions of people in the world, my heart chose you. You are my happiness, my peace, and my forever love."
 
 let i=0
 
 function startTyping(){
 
-const typing=setInterval(()=>{
+let typing=setInterval(()=>{
 
 document.getElementById("message").innerHTML+=text[i]
 
 i++
 
-if(i>=text.length){
+if(i==text.length){
 clearInterval(typing)
 }
 
@@ -199,44 +321,137 @@ clearInterval(typing)
 
 }
 
-/* proposal */
+/* Photo slideshow */
 
-function showProposal(){
+let photos=["photo1.jpeg","photo2.jpeg","photo3.jpeg"]
+
+let index=0
+
+setInterval(()=>{
+
+index++
+
+if(index>=photos.length){
+index=0
+}
+
+document.getElementById("slide").src=photos[index]
+
+},3000)
+
+/* Proposal */
+
+function proposal(){
 
 document.getElementById("story").classList.add("hidden")
 document.getElementById("proposal").classList.remove("hidden")
 
 }
 
-/* runaway NO button */
-
-const noBtn=document.getElementById("noBtn")
-
-noBtn.addEventListener("mouseover",()=>{
-
-const x=Math.random()*(window.innerWidth-120)
-const y=Math.random()*(window.innerHeight-60)
-
-noBtn.style.position="fixed"
-noBtn.style.left=x+"px"
-noBtn.style.top=y+"px"
-
-})
-
-/* celebration */
+/* Celebration */
 
 function celebrate(){
 
-document.getElementById("proposal").classList.add("hidden")
-document.getElementById("celebration").classList.remove("hidden")
+/* Heartbeat vibration */
+if(navigator.vibrate){
+navigator.vibrate([200,100,200,100,400])
+}
 
-startLoveTimer()
+/* Proposal flash effect */
+const flash=document.createElement("div")
+flash.style.position="fixed"
+flash.style.top="0"
+flash.style.left="0"
+flash.style.width="100%"
+flash.style.height="100%"
+flash.style.background="white"
+flash.style.opacity="0.8"
+flash.style.zIndex="9999"
+document.body.appendChild(flash)
+
+setTimeout(()=>{
+flash.style.transition="opacity 1s"
+flash.style.opacity="0"
+},100)
+
+setTimeout(()=>{
+flash.remove()
+},1200)
+
+/* fireworks start */
+startFireworks()
 
 }
 
-/* love timer */
+/* Floating hearts */
 
-const loveStartDate=new Date("2025-04-07")
+function createHeart(){
+
+const heart=document.createElement("div")
+
+heart.className="heart"
+
+heart.innerHTML="❤️"
+
+heart.style.left=Math.random()*100+"%"
+
+heart.style.fontSize=Math.random()*20+10+"px"
+
+heart.style.animationDuration=Math.random()*3+3+"s"
+
+document.querySelector(".hearts").appendChild(heart)
+
+setTimeout(()=>{heart.remove()},5000)
+
+}
+
+setInterval(createHeart,200)
+
+/* Service Worker */
+
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker.register("service-worker.js")
+.then(()=>console.log("Service Worker Registered"))
+}
+
+/* Heart Explosion */
+
+function heartExplosion(){
+
+for(let i=0;i<80;i++){
+
+const heart=document.createElement("div")
+
+heart.innerHTML="❤️"
+
+heart.style.position="fixed"
+heart.style.left="50%"
+heart.style.top="50%"
+heart.style.fontSize=Math.random()*30+20+"px"
+
+heart.style.transition="all 2s ease-out"
+
+document.body.appendChild(heart)
+
+let x=(Math.random()-0.5)*600
+let y=(Math.random()-0.5)*600
+
+setTimeout(()=>{
+heart.style.transform=translate(${x}px, ${y}px)
+heart.style.opacity="0"
+},10)
+
+setTimeout(()=>{
+heart.remove()
+},2000)
+
+}
+
+}
+
+/* Love Timer */
+
+const loveStartDate=new Date("2025-04-07") // change to your real date
 
 function startLoveTimer(){
 
@@ -246,16 +461,228 @@ const now=new Date()
 
 const diff=now-loveStartDate
 
-const days=Math.floor(diff/(1000*60*60*24))
+const days=Math.floor(diff/(1000606024))
+const hours=Math.floor((diff/(10006060))%24)
+const minutes=Math.floor((diff/(100060))%60)
 
-document.getElementById("loveTimer").innerText=
-"Together for ❤️ "+days+" days"
+document.getElementById("loveTimer").innerHTML=
+"Together for ❤️ <br>"+days+" Days "+hours+" Hours "+minutes+" Minutes"
 
 },1000)
 
 }
 
-</script>
+const canvas=document.getElementById("fireworksCanvas")
+const ctx=canvas.getContext("2d")
 
-</body>
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+function createFirework(){
+
+let x=Math.random()*canvas.width
+let y=Math.random()*canvas.height/2
+
+for(let i=0;i<80;i++){
+
+particles.push({
+x:x,
+y:y,
+vx:(Math.random()-0.5)*5,
+vy:(Math.random()-0.5)*5,
+life:100
+})
+
+}
+
+}
+
+function updateFireworks(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach((p,index)=>{
+
+p.x+=p.vx
+p.y+=p.vy
+p.life--
+
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)"
+ctx.fillRect(p.x,p.y,3,3)
+
+if(p.life<=0){
+particles.splice(index,1)
+}
+
+})
+
+requestAnimationFrame(updateFireworks)
+
+}
+
+setInterval(createFirework,800)
+
+updateFireworks()
+
+let tapCount=0
+
+document.addEventListener("click",secretTap)
+document.addEventListener("touchstart",secretTap)
+
+function secretTap(){
+
+if(document.getElementById("celebration").classList.contains("hidden")) return
+
+tapCount++
+
+if(tapCount>=5){
+document.getElementById("secretMessage").classList.add("showSecret")
+}
+
+}
+
+const heartCanvas=document.getElementById("heartSky")
+const heartCtx=heartCanvas.getContext("2d")
+
+heartCanvas.width=window.innerWidth
+heartCanvas.height=window.innerHeight
+
+let heartParticles=[]
+
+function createHeartName(){
+
+const text="KRUSHITHA"
+
+let size=Math.min(heartCanvas.width/8,100)
+heartCtx.font="bold "+size+"px Arial"
+
+/* measure text width */
+
+const textWidth=heartCtx.measureText(text).width
+
+/* calculate center */
+
+const x=(heartCanvas.width-textWidth)/2
+const y=heartCanvas.height/5
+
+heartCtx.fillStyle="white"
+heartCtx.fillText(text,x,y)
+
+const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
+
+heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+
+for(let y=0;y<imageData.height;y+=6){
+for(let x=0;x<imageData.width;x+=6){
+
+const index=(y*imageData.width+x)*4
+
+if(imageData.data[index+3]>128){
+
+heartParticles.push({
+x:Math.random()*heartCanvas.width,
+y:Math.random()*heartCanvas.height,
+tx:x,
+ty:y
+})
+
+}
+
+}
+}
+
+}
+
+let heartStartTime = null
+let exploded = false
+
+function animateHeartSky(){
+
+heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+
+heartParticles.forEach(p=>{
+
+p.x += (p.tx - p.x) * 0.05
+p.y += (p.ty - p.y) * 0.05
+
+heartCtx.font="14px Arial"
+heartCtx.fillText("❤️",p.x,p.y)
+
+})
+
+if(!heartStartTime){
+heartStartTime = Date.now()
+}
+
+let elapsed = Date.now() - heartStartTime
+
+/* after 5 seconds explode */
+
+if(elapsed > 5000 && !exploded){
+
+exploded = true
+
+heartParticles.forEach(p=>{
+particles.push({
+x:p.x,
+y:p.y,
+vx:(Math.random()-0.5)*8,
+vy:(Math.random()-0.5)*8,
+life:120
+})
+})
+
+heartParticles = []
+}
+
+requestAnimationFrame(animateHeartSky)
+
+}
+function startHeartSky(){
+
+createHeartName()
+animateHeartSky()
+
+}
+
+const noBtn=document.getElementById("noBtn")
+
+noBtn.addEventListener("mouseover",moveNoButton)
+noBtn.addEventListener("touchstart",moveNoButton)
+
+function moveNoButton(){
+
+let x=Math.random()(window.innerWidth-120)
+let y=Math.random()(window.innerHeight-60)
+
+noBtn.style.position="fixed"
+noBtn.style.left=x+"px"
+noBtn.style.top=y+"px"
+
+}
+
+let tapCount=0
+
+const secretBtn=document.getElementById("secretBtn")
+const secretContent=document.getElementById("secretContent")
+
+secretBtn.addEventListener("click",()=>{
+
+tapCount++
+
+secretBtn.innerText="Tap me more... ("+tapCount+"/5)"
+
+if(tapCount>=5){
+
+secretContent.style.display="block"
+secretBtn.innerText="You found the secret ❤️"
+
+}
+
+})
+
+</script>  
+</body>  
 </html>
