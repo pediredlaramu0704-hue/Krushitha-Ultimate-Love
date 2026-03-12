@@ -1,9 +1,9 @@
 {
 "name": "Ram ❤️ Krushitha",
-"short_name": "Love",
-"start_url": "index.html",
+"short_name": "Ram ❤️",
+"start_url": "./index.html",
 "display": "standalone",
-"background_color": "#ff7eb3",
+"background_color": "#000000",
 "theme_color": "#ff4d6d",
 "icons": [
 {
