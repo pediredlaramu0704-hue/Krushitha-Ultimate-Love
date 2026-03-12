@@ -156,40 +156,6 @@ animation:flash 1s infinite;
 100%{opacity:1}
 }
 
-/* Heart Explosion */
-
-function heartExplosion(){
-
-for(let i=0;i<80;i++){
-
-const heart=document.createElement("div")
-
-heart.innerHTML="❤️"
-
-heart.style.position="fixed"
-heart.style.left="50%"
-heart.style.top="50%"
-heart.style.fontSize=Math.random()*30+20+"px"
-
-heart.style.transition="all 2s ease-out"
-
-document.body.appendChild(heart)
-
-let x=(Math.random()-0.5)*600
-let y=(Math.random()-0.5)*600
-
-setTimeout(()=>{
-heart.style.transform=`translate(${x}px, ${y}px)`
-heart.style.opacity="0"
-},10)
-
-setTimeout(()=>{
-heart.remove()
-},2000)
-
-}
-
-}
 
 /* Love Timer */
 
@@ -581,6 +547,8 @@ heartCanvas.width=window.innerWidth
 heartCanvas.height=window.innerHeight
 
 let heartParticles=[]
+let heartStart=null
+let exploded=false
 
 function createHeartName(){
 
@@ -592,7 +560,7 @@ heartCtx.font="bold "+size+"px Arial"
 const textWidth=heartCtx.measureText(text).width
 
 const x=(heartCanvas.width-textWidth)/2
-const y=heartCanvas.height/4   // moved higher
+const y=heartCanvas.height/4
 
 heartCtx.fillStyle="white"
 heartCtx.fillText(text,x,y)
@@ -601,22 +569,98 @@ const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
 
 heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
 
-for(let y=0;y<imageData.height;y+=6){
-for(let x=0;x<imageData.width;x+=6){
+for(let py=0;py<imageData.height;py+=6){
+for(let px=0;px<imageData.width;px+=6){
 
-const index=(y*imageData.width+x)*4
+const index=(py*imageData.width+px)*4
 
 if(imageData.data[index+3]>128){
 
-heartParticles.forEach(p=>{
+heartParticles.push({
+x:Math.random()*heartCanvas.width,
+y:Math.random()*heartCanvas.height,
+tx:px,
+ty:py
+})
+
+}
+
+}
+}
+
+}
+
+function animateHeartSky(){
+  
+heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+
+for(let i=0;i<heartParticles.length;i++){
+
+let p=heartParticles[i]
+
+p.x+=(p.tx-p.x)*0.05
+p.y+=(p.ty-p.y)*0.05
+
+heartCtx.font="16px Arial"
+heartCtx.fillText("❤️",p.x,p.y)
+heartCtx.shadowColor="red"
+heartCtx.shadowBlur=20
+
+}
+
+if(!heartStart){
+heartStart=Date.now()
+}
+
+let elapsed=Date.now()-heartStart
+
+/* stay 5 seconds */
+
+if(elapsed<5000){
+requestAnimationFrame(animateHeartSky)
+return
+}
+
+/* explode */
+
+if(!exploded){
+
+exploded=true
+
+for(let i=0;i<heartParticles.length;i++){
+
+let p=heartParticles[i]
+
 particles.push({
 x:p.x,
 y:p.y,
 vx:(Math.random()-0.5)*8,
 vy:(Math.random()-0.5)*8,
-life:120
+life:80
 })
-})
+
+}
+
+heartParticles=[]
+
+}
+
+/* continue fireworks animation */
+
+requestAnimationFrame(animateHeartSky)
+
+}
+
+function startHeartSky(){
+
+heartParticles=[]
+heartStart=null
+exploded=false
+
+createHeartName()
+animateHeartSky()
+
+}
 
 /* clear heart particles */
 heartParticles.length = 0
@@ -731,6 +775,7 @@ heartCanvas.height = window.innerHeight
 
 </body>
 </html>
+
 
 
 
