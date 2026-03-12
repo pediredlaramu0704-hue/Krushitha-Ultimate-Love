@@ -1,30 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ram ❤️ Krushitha</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4d6d">
+<link rel="apple-touch-icon" href="icon.png">
+
+<title>Ram ❤️ Krushitha</title>
 
 <style>
 
 body{
 margin:0;
-font-family: 'Segoe UI', sans-serif;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:Arial;
+background:black;
 color:white;
 text-align:center;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-section{
-min-height:100vh;
+/* Netflix intro */
+
+#netflixIntro{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.logo{
+font-size:50px;
+color:red;
+letter-spacing:5px;
+animation:netflix 3s forwards;
+}
+
+@keyframes netflix{
+0%{opacity:0; transform:scale(0.5);}
+50%{opacity:1; transform:scale(1.2);}
+100%{opacity:0; transform:scale(2);}
+}
+
+/* Star background */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:0.3;
+}
+
+/* Screens */
+
+.screen{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:20px;
+}
+
+.hidden{
+display:none;
 }
 
 h1{
@@ -32,29 +81,33 @@ font-size:40px;
 }
 
 button{
-background:white;
-color:#ff4d6d;
+padding:15px 30px;
+font-size:20px;
+background:#ff4d6d;
+color:white;
 border:none;
-padding:15px 25px;
-font-size:18px;
-border-radius:30px;
+border-radius:10px;
 cursor:pointer;
 margin-top:20px;
 }
 
-button:hover{
-transform:scale(1.05);
-}
+/* Photo slideshow */
 
-img{
-max-width:300px;
+#slideshow{
+width:260px;
+height:260px;
 border-radius:20px;
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
+overflow:hidden;
+margin-top:20px;
 }
 
-.hidden{
-display:none;
+#slideshow img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
+
+/* Hearts */
 
 .hearts{
 position:fixed;
@@ -67,7 +120,7 @@ pointer-events:none;
 
 .heart{
 position:absolute;
-color:white;
+color:red;
 animation:float 5s linear infinite;
 }
 
@@ -76,108 +129,182 @@ animation:float 5s linear infinite;
 100%{transform:translateY(-10vh)}
 }
 
+/* Fireworks */
+
+#fireworks{
+font-size:60px;
+animation:flash 1s infinite;
+}
+
+@keyframes flash{
+0%{opacity:1}
+50%{opacity:0.3}
+100%{opacity:1}
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="hearts"></div>
+<div class="stars"></div>
 
-<section>
-
-<h1>Ram ❤️ Krushitha</h1>
-
-<p>The Most Beautiful Love Story Ever Written</p>
-
-<button onclick="start()">Start Our Love Story</button>
-
-</section>
-
-
-<section id="story" class="hidden">
-
-<h1>Our Story</h1>
-
-<p>
-
-Krushitha,
-
-Out of billions of people in this world...  
-my heart somehow found **you**.
-
-You are not just my girlfriend.  
-You are my happiness.  
-My peace.  
-My home.
-
-Every moment with you feels like a beautiful dream  
-I never want to wake up from.
-
-And today I just want to say...
-
-</p>
-
-<button onclick="reveal()">Click for a Surprise ❤️</button>
-
-</section>
-
-
-<section id="final" class="hidden">
-
-<h1>I Love You Krushitha 💘</h1>
-
-<p>
-
-No matter where life takes us...
-
-I promise to stand beside you,  
-laugh with you,  
-support you,  
-and love you more every single day.
-
-You are my forever.
-
-— Ram ❤️
-
-</p>
-
-<img src="photo.jpg">
-
-</section>
-
-
-<audio id="music" loop>
-<source src="music.mp3" type="audio/mpeg">
+<audio id="music" autoplay loop>
+<source src="music.mp3" type="audio/mp3">
 </audio>
 
+<div id="netflixIntro">
+<h1 class="logo">RAM ❤️ KRUSHITHA</h1>
+</div>
+
+<div class="hearts"></div>
+
+<div id="intro" class="screen">
+
+<h1>A Love Story</h1>
+<h2>Ram ❤️ Krushitha</h2>
+
+<button onclick="startCountdown()">Start</button>
+
+</div>
+
+<div id="countdown" class="screen hidden">
+<h1 id="timer">3</h1>
+</div>
+
+<div id="story" class="screen hidden">
+
+<h1>Our Love Story</h1>
+
+<p id="message"></p>
+
+<div id="slideshow">
+<img id="slide" src="photo1.jpeg">
+</div>
+
+<br>
+
+<button onclick="proposal()">Continue</button>
+
+</div>
+
+<div id="proposal" class="screen hidden">
+
+<h1>Krushitha 💍</h1>
+<h2>Will you stay with me forever?</h2>
+
+<button onclick="celebrate()">YES ❤️</button>
+
+</div>
+
+<div id="celebration" class="screen hidden">
+
+<h1 id="fireworks">🎆🎆🎆</h1>
+
+<h1>Ram ❤️ Krushitha Forever</h1>
+<h2>Our Love Story Will Never End</h2>
+
+</div>
 
 <script>
 
-function start(){
+/* Netflix intro */
 
-document.getElementById("story").classList.remove("hidden");
+setTimeout(()=>{
+document.getElementById("netflixIntro").style.display="none"
+},3000)
 
-document.getElementById("music").play();
+/* Countdown */
 
-window.scrollTo({
-top:window.innerHeight,
-behavior:"smooth"
-})
+function startCountdown(){
+
+document.getElementById("intro").classList.add("hidden")
+document.getElementById("countdown").classList.remove("hidden")
+
+let count=3
+
+let timer=setInterval(()=>{
+
+count--
+
+document.getElementById("timer").innerText=count
+
+if(count==0){
+
+clearInterval(timer)
+
+document.getElementById("countdown").classList.add("hidden")
+
+document.getElementById("story").classList.remove("hidden")
+
+startTyping()
 
 }
 
-
-function reveal(){
-
-document.getElementById("final").classList.remove("hidden");
-
-window.scrollTo({
-top:window.innerHeight*2,
-behavior:"smooth"
-})
+},1000)
 
 }
 
+/* Typing Love Message */
+
+let text="Krushitha, out of billions of people in the world, my heart chose you. You are my happiness, my peace, and my forever love."
+
+let i=0
+
+function startTyping(){
+
+let typing=setInterval(()=>{
+
+document.getElementById("message").innerHTML+=text[i]
+
+i++
+
+if(i==text.length){
+clearInterval(typing)
+}
+
+},40)
+
+}
+
+/* Photo slideshow */
+
+let photos=["photo1.jpeg","photo2.jpeg","photo3.jpeg"]
+
+let index=0
+
+setInterval(()=>{
+
+index++
+
+if(index>=photos.length){
+index=0
+}
+
+document.getElementById("slide").src=photos[index]
+
+},3000)
+
+/* Proposal */
+
+function proposal(){
+
+document.getElementById("story").classList.add("hidden")
+document.getElementById("proposal").classList.remove("hidden")
+
+}
+
+/* Celebration */
+
+function celebrate(){
+
+document.getElementById("proposal").classList.add("hidden")
+document.getElementById("celebration").classList.remove("hidden")
+
+}
+
+/* Floating hearts */
 
 function createHeart(){
 
@@ -199,7 +326,14 @@ setTimeout(()=>{heart.remove()},5000)
 
 }
 
-setInterval(createHeart,300)
+setInterval(createHeart,200)
+
+/* Service Worker */
+
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker.register("service-worker.js")
+.then(()=>console.log("Service Worker Registered"))
+}
 
 </script>
 
