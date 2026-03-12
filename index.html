@@ -235,8 +235,23 @@ text-align:center;
 
 .showSecret{
 opacity:1;
-} 
+}
 
+#heartSky{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+#noBtn{
+position:relative;
+background:#444;
+margin-left:10px;
+}
+  
 </style>
 
 
@@ -291,17 +306,16 @@ opacity:1;
 <h2>Will you stay with me forever?</h2>
 
 <button onclick="celebrate()">YES ❤️</button>
-
+<button id="noBtn">NO 😢</button>
 </div>
 
 <div id="celebration" class="screen hidden">
 
 <canvas id="fireworksCanvas"></canvas>
+<canvas id="heartSky"></canvas>
 
 <h1>Ram ❤️ Krushitha Forever</h1>
-
 <h2>Our Love Story Will Never End</h2>
-
 <h3 id="loveTimer"></h3>
 
 <h2 id="secretMessage" class="hiddenSecret">
@@ -463,6 +477,7 @@ document.getElementById("celebration").classList.remove("hidden")
 
 heartExplosion()
 startLoveTimer()
+startHeartSky()
 
 }
 
@@ -561,11 +576,128 @@ document.getElementById("secretMessage").classList.add("showSecret")
 }
 
 }
+
+const heartCanvas=document.getElementById("heartSky")
+const heartCtx=heartCanvas.getContext("2d")
+
+heartCanvas.width=window.innerWidth
+heartCanvas.height=window.innerHeight
+
+let heartParticles=[]
+
+function createHeartName(){
+
+const text="KRUSHITHA"
+
+let size=Math.min(heartCanvas.width/8,100)
+heartCtx.font="bold "+size+"px Arial"
+
+const textWidth=heartCtx.measureText(text).width
+
+const x=(heartCanvas.width-textWidth)/2
+const y=heartCanvas.height/4   // moved higher
+
+heartCtx.fillStyle="white"
+heartCtx.fillText(text,x,y)
+
+const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
+
+heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+
+for(let y=0;y<imageData.height;y+=6){
+for(let x=0;x<imageData.width;x+=6){
+
+const index=(y*imageData.width+x)*4
+
+if(imageData.data[index+3]>128){
+
+heartParticles.push({
+x:Math.random()*heartCanvas.width,
+y:Math.random()*heartCanvas.height,
+tx:x,
+ty:y
+})
+
+}
+
+}
+}
+
+}
+let heartStartTime = null
+let exploded = false
+
+function animateHeartSky(){
+
+heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+
+heartParticles.forEach(p=>{
+
+p.x += (p.tx - p.x) * 0.05
+p.y += (p.ty - p.y) * 0.05
+
+heartCtx.font="14px Arial"
+heartCtx.fillText("❤️",p.x,p.y)
+
+})
+
+if(!heartStartTime){
+heartStartTime = Date.now()
+}
+
+let elapsed = Date.now() - heartStartTime
+
+/* after 5 seconds explode */
+
+if(elapsed > 5000 && !exploded){
+
+exploded = true
+
+heartParticles.forEach(p=>{
+particles.push({
+x:p.x,
+y:p.y,
+vx:(Math.random()-0.5)*8,
+vy:(Math.random()-0.5)*8,
+life:120
+})
+})
+
+heartParticles = []
+}
+
+requestAnimationFrame(animateHeartSky)
+
+}
+function startHeartSky(){
+
+createHeartName()
+animateHeartSky()
+
+}
+
+const noBtn=document.getElementById("noBtn")
+
+noBtn.addEventListener("mouseover",moveNoButton)
+noBtn.addEventListener("touchstart",moveNoButton)
+
+function moveNoButton(){
+
+let x=Math.random()*(window.innerWidth-120)
+let y=Math.random()*(window.innerHeight-60)
+
+noBtn.style.position="fixed"
+noBtn.style.left=x+"px"
+noBtn.style.top=y+"px"
+
+}
+
   
 </script>
 
 </body>
 </html>
+
 
 
 
