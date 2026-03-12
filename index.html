@@ -1,12 +1,9 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff4d6d">
-<link rel="apple-touch-icon" href="icon.png">
-
 <title>Ram ❤️ Krushitha</title>
 
 <style>
@@ -49,20 +46,16 @@ animation:netflix 3s forwards;
 }
 
 @keyframes heartbeat{
-
 0%{transform:scale(1)}
 25%{transform:scale(1.1)}
 50%{transform:scale(1)}
 75%{transform:scale(1.1)}
 100%{transform:scale(1)}
-
 }
 
 #proposal h1{
 animation:heartbeat 1.5s infinite;
 }
-
-/* Star background */
 
 .stars{
 position:fixed;
@@ -71,8 +64,6 @@ height:100%;
 background:url("https://www.transparenttextures.com/patterns/stardust.png");
 opacity:0.3;
 }
-
-/* Screens */
 
 .screen{
 position:absolute;
@@ -90,10 +81,6 @@ align-items:center;
 display:none;
 }
 
-h1{
-font-size:40px;
-}
-
 button{
 padding:15px 30px;
 font-size:20px;
@@ -105,7 +92,7 @@ cursor:pointer;
 margin-top:20px;
 }
 
-/* Photo slideshow */
+/* slideshow */
 
 #slideshow{
 width:260px;
@@ -121,7 +108,7 @@ height:100%;
 object-fit:cover;
 }
 
-/* Hearts */
+/* floating hearts */
 
 .hearts{
 position:fixed;
@@ -143,44 +130,9 @@ animation:float 5s linear infinite;
 100%{transform:translateY(-10vh)}
 }
 
-/* Fireworks */
+/* fireworks canvas */
 
-#fireworks{
-font-size:60px;
-animation:flash 1s infinite;
-}
-
-@keyframes flash{
-0%{opacity:1}
-50%{opacity:0.3}
-100%{opacity:1}
-}
-
-
-/* Love Timer */
-
-const loveStartDate=new Date("2024-01-01") // change to your real date
-
-function startLoveTimer(){
-
-setInterval(()=>{
-
-const now=new Date()
-
-const diff=now-loveStartDate
-
-const days=Math.floor(diff/(1000*60*60*24))
-const hours=Math.floor((diff/(1000*60*60))%24)
-const minutes=Math.floor((diff/(1000*60))%60)
-
-document.getElementById("loveTimer").innerHTML=
-"Together for ❤️ <br>"+days+" Days "+hours+" Hours "+minutes+" Minutes"
-
-},1000)
-
-}
-
-#fireworksCanvas{
+#fireworksCanvas,#heartSky{
 position:fixed;
 top:0;
 left:0;
@@ -196,40 +148,22 @@ margin-top:30px;
 color:#ff4d6d;
 font-size:22px;
 max-width:300px;
-text-align:center;
 }
 
 .showSecret{
 opacity:1;
 }
 
-#heartSky{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-}
-
 #noBtn{
-position:relative;
 background:#444;
-margin-left:10px;
 }
-  
+
 </style>
-
-
 </head>
 
 <body>
 
 <div class="stars"></div>
-
-<audio id="music" autoplay loop>
-<source src="music.mp3" type="audio/mp3">
-</audio>
 
 <div id="netflixIntro">
 <h1 class="logo">RAM ❤️ KRUSHITHA</h1>
@@ -238,12 +172,9 @@ margin-left:10px;
 <div class="hearts"></div>
 
 <div id="intro" class="screen">
-
 <h1>A Love Story</h1>
 <h2>Ram ❤️ Krushitha</h2>
-
 <button onclick="startCountdown()">Start</button>
-
 </div>
 
 <div id="countdown" class="screen hidden">
@@ -251,26 +182,19 @@ margin-left:10px;
 </div>
 
 <div id="story" class="screen hidden">
-
 <h1>Our Love Story</h1>
-
 <p id="message"></p>
 
 <div id="slideshow">
 <img id="slide" src="photo1.jpeg">
 </div>
 
-<br>
-
 <button onclick="proposal()">Continue</button>
-
 </div>
 
 <div id="proposal" class="screen hidden">
-
 <h1>Krushitha 💍</h1>
 <h2>Will you stay with me forever?</h2>
-
 <button onclick="celebrate()">YES ❤️</button>
 <button id="noBtn">NO 😢</button>
 </div>
@@ -281,69 +205,16 @@ margin-left:10px;
 <canvas id="heartSky"></canvas>
 
 <h1>Ram ❤️ Krushitha Forever</h1>
-<h2>Our Love Story Will Never End</h2>
 <h3 id="loveTimer"></h3>
 
 <h2 id="secretMessage" class="hiddenSecret">
 💍 Krushitha… one day this will not be a website.
-It will be our real story forever. ❤️
+It will be our real story forever ❤️
 </h2>
 
 </div>
 
 <script>
-
-const canvas=document.getElementById("fireworksCanvas")
-const ctx=canvas.getContext("2d")
-
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-
-let particles=[]
-
-function createFirework(){
-
-let x=Math.random()*canvas.width
-let y=Math.random()*canvas.height/2
-
-for(let i=0;i<80;i++){
-
-particles.push({
-x:x,
-y:y,
-vx:(Math.random()-0.5)*5,
-vy:(Math.random()-0.5)*5,
-life:100
-})
-
-}
-
-}
-
-function updateFireworks(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-for(let i = particles.length - 1; i >= 0; i--){
-
-let p = particles[i]
-
-p.x += p.vx
-p.y += p.vy
-p.life--
-
-ctx.fillStyle = "hsl(" + Math.random()*360 + ",100%,50%)"
-ctx.fillRect(p.x,p.y,3,3)
-
-if(p.life <= 0){
-particles.splice(i,1)
-}
-
-}
-
-requestAnimationFrame(updateFireworks)
-
-}
 
 /* Netflix intro */
 
@@ -363,75 +234,55 @@ let count=3
 let timer=setInterval(()=>{
 
 count--
-
 document.getElementById("timer").innerText=count
 
 if(count==0){
-
 clearInterval(timer)
-
 document.getElementById("countdown").classList.add("hidden")
-
 document.getElementById("story").classList.remove("hidden")
-
 startTyping()
-
 }
 
 },1000)
 
 }
 
-/* Typing Love Message */
+/* typing message */
 
 let text="Krushitha, out of billions of people in the world, my heart chose you. You are my happiness, my peace, and my forever love."
-
 let i=0
 
 function startTyping(){
 
 let typing=setInterval(()=>{
-
 document.getElementById("message").innerHTML+=text[i]
-
 i++
 
-if(i==text.length){
-clearInterval(typing)
-}
+if(i==text.length) clearInterval(typing)
 
 },40)
 
 }
 
-/* Photo slideshow */
+/* slideshow */
 
 let photos=["photo1.jpeg","photo2.jpeg","photo3.jpeg"]
-
 let index=0
 
 setInterval(()=>{
-
 index++
-
-if(index>=photos.length){
-index=0
-}
-
+if(index>=photos.length) index=0
 document.getElementById("slide").src=photos[index]
-
 },3000)
 
-/* Proposal */
+/* proposal */
 
 function proposal(){
-
 document.getElementById("story").classList.add("hidden")
 document.getElementById("proposal").classList.remove("hidden")
-
 }
 
-/* Celebration */
+/* celebration */
 
 function celebrate(){
 
@@ -444,20 +295,15 @@ startHeartSky()
 
 }
 
-/* Floating hearts */
+/* floating hearts */
 
 function createHeart(){
 
 const heart=document.createElement("div")
-
 heart.className="heart"
-
 heart.innerHTML="❤️"
-
 heart.style.left=Math.random()*100+"%"
-
 heart.style.fontSize=Math.random()*20+10+"px"
-
 heart.style.animationDuration=Math.random()*3+3+"s"
 
 document.querySelector(".hearts").appendChild(heart)
@@ -468,14 +314,7 @@ setTimeout(()=>{heart.remove()},5000)
 
 setInterval(createHeart,200)
 
-/* Service Worker */
-
-if ("serviceWorker" in navigator) {
-navigator.serviceWorker.register("service-worker.js")
-.then(()=>console.log("Service Worker Registered"))
-}
-
-/* Heart Explosion */
+/* heart explosion */
 
 function heartExplosion(){
 
@@ -484,32 +323,38 @@ for(let i=0;i<80;i++){
 const heart=document.createElement("div")
 
 heart.innerHTML="❤️"
-
 heart.style.position="fixed"
-heart.style.left=Math.random()*100+"%"
-heart.style.top=Math.random()*100+"%"
+heart.style.left="50%"
+heart.style.top="50%"
 heart.style.fontSize=Math.random()*30+20+"px"
 
 document.body.appendChild(heart)
 
+let x=(Math.random()-0.5)*600
+let y=(Math.random()-0.5)*600
+
+heart.style.transition="all 2s"
+
 setTimeout(()=>{
-heart.remove()
-},3000)
+heart.style.transform=`translate(${x}px,${y}px)`
+heart.style.opacity="0"
+},10)
+
+setTimeout(()=>{heart.remove()},2000)
 
 }
 
 }
 
-/* Love Timer */
+/* love timer */
 
-const loveStartDate=new Date("2025-04-07") // change to your real date
+const loveStartDate=new Date("2025-04-07")
 
 function startLoveTimer(){
 
 setInterval(()=>{
 
 const now=new Date()
-
 const diff=now-loveStartDate
 
 const days=Math.floor(diff/(1000*60*60*24))
@@ -523,22 +368,54 @@ document.getElementById("loveTimer").innerHTML=
 
 }
 
+/* secret tap */
+
 let tapCount=0
 
-document.addEventListener("click",secretTap)
-document.addEventListener("touchstart",secretTap)
-
-function secretTap(){
-
+document.addEventListener("click",()=>{
 if(document.getElementById("celebration").classList.contains("hidden")) return
-
 tapCount++
-
 if(tapCount>=5){
 document.getElementById("secretMessage").classList.add("showSecret")
 }
+})
+
+/* fireworks */
+
+const canvas=document.getElementById("fireworksCanvas")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+function updateFireworks(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+for(let i=particles.length-1;i>=0;i--){
+
+let p=particles[i]
+
+p.x+=p.vx
+p.y+=p.vy
+p.life--
+
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)"
+ctx.fillRect(p.x,p.y,3,3)
+
+if(p.life<=0) particles.splice(i,1)
 
 }
+
+requestAnimationFrame(updateFireworks)
+
+}
+
+updateFireworks()
+
+/* heart name animation */
 
 const heartCanvas=document.getElementById("heartSky")
 const heartCtx=heartCanvas.getContext("2d")
@@ -554,15 +431,12 @@ function createHeartName(){
 
 const text="KRUSHITHA"
 
-let size=Math.min(heartCanvas.width/8,100)
-heartCtx.font="bold "+size+"px Arial"
+heartCtx.font="bold 100px Arial"
+let textWidth=heartCtx.measureText(text).width
 
-const textWidth=heartCtx.measureText(text).width
+let x=(heartCanvas.width-textWidth)/2
+let y=heartCanvas.height/3
 
-const x=(heartCanvas.width-textWidth)/2
-const y=heartCanvas.height/4
-
-heartCtx.fillStyle="white"
 heartCtx.fillText(text,x,y)
 
 const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
@@ -572,7 +446,7 @@ heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
 for(let py=0;py<imageData.height;py+=6){
 for(let px=0;px<imageData.width;px+=6){
 
-const index=(py*imageData.width+px)*4
+let index=(py*imageData.width+px)*4
 
 if(imageData.data[index+3]>128){
 
@@ -591,46 +465,23 @@ ty:py
 }
 
 function animateHeartSky(){
-  
+
 heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
 
-for(let i=0;i<heartParticles.length;i++){
-
-let p=heartParticles[i]
-
+heartParticles.forEach(p=>{
 p.x+=(p.tx-p.x)*0.05
 p.y+=(p.ty-p.y)*0.05
-
 heartCtx.font="16px Arial"
 heartCtx.fillText("❤️",p.x,p.y)
-heartCtx.shadowColor="red"
-heartCtx.shadowBlur=20
+})
 
-}
+if(!heartStart) heartStart=Date.now()
 
-if(!heartStart){
-heartStart=Date.now()
-}
-
-let elapsed=Date.now()-heartStart
-
-/* stay 5 seconds */
-
-if(elapsed<5000){
-requestAnimationFrame(animateHeartSky)
-return
-}
-
-/* explode */
-
-if(!exploded){
+if(Date.now()-heartStart>5000 && !exploded){
 
 exploded=true
 
-for(let i=0;i<heartParticles.length;i++){
-
-let p=heartParticles[i]
-
+heartParticles.forEach(p=>{
 particles.push({
 x:p.x,
 y:p.y,
@@ -638,117 +489,26 @@ vx:(Math.random()-0.5)*8,
 vy:(Math.random()-0.5)*8,
 life:80
 })
-
-}
-
-heartParticles=[]
-
-}
-
-/* continue fireworks animation */
-
-requestAnimationFrame(animateHeartSky)
-
-}
-
-function startHeartSky(){
-
-heartParticles=[]
-heartStart=null
-exploded=false
-
-createHeartName()
-animateHeartSky()
-
-}
-
-/* clear heart particles */
-heartParticles.length = 0
-
-}
-
-}
-}
-
-}
-let heartStartTime = null
-let exploded = false
-
-function animateHeartSky(){
-
-heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
-
-for(let i=0;i<heartParticles.length;i++){
-
-let p = heartParticles[i]
-
-p.x += (p.tx - p.x) * 0.05
-p.y += (p.ty - p.y) * 0.05
-
-heartCtx.font="16px Arial"
-heartCtx.fillText("❤️",p.x,p.y)
-
-}
-
-if(!heartStart){
-heartStart = Date.now()
-}
-
-let elapsed = Date.now() - heartStart
-
-/* stay 5 seconds */
-
-if(elapsed < 5000){
-requestAnimationFrame(animateHeartSky)
-return
-}
-
-/* explode once */
-
-if(!exploded){
-
-exploded = true
-
-for(let i=0;i<heartParticles.length;i++){
-
-let p = heartParticles[i]
-
-particles.push({
-x:p.x,
-y:p.y,
-vx:(Math.random()-0.5)*8,
-vy:(Math.random()-0.5)*8,
-life:80
 })
 
-}
-
-heartParticles = []
-
-}
-
-/* stop drawing hearts */
+heartParticles=[]
 
 }
 
 requestAnimationFrame(animateHeartSky)
 
 }
+
 function startHeartSky(){
-
-heartParticles = []
-heartStart = null
-exploded = false
-
 createHeartName()
 animateHeartSky()
-
 }
+
+/* run away no button */
 
 const noBtn=document.getElementById("noBtn")
 
 noBtn.addEventListener("mouseover",moveNoButton)
-noBtn.addEventListener("touchstart",moveNoButton)
 
 function moveNoButton(){
 
@@ -761,28 +521,7 @@ noBtn.style.top=y+"px"
 
 }
 
-window.addEventListener("resize",()=>{
-
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
-heartCanvas.width = window.innerWidth
-heartCanvas.height = window.innerHeight
-
-})  
-  
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
