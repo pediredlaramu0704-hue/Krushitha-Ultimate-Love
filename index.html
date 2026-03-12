@@ -228,6 +228,9 @@ opacity:0;
 transition:opacity 2s;
 margin-top:30px;
 color:#ff4d6d;
+font-size:22px;
+max-width:300px;
+text-align:center;
 }
 
 .showSecret{
@@ -544,24 +547,26 @@ document.getElementById("loveTimer").innerHTML=
 
 let tapCount=0
 
-document.addEventListener("click",function(){
+document.addEventListener("click",secretTap)
+document.addEventListener("touchstart",secretTap)
+
+function secretTap(){
 
 if(document.getElementById("celebration").classList.contains("hidden")) return
 
 tapCount++
 
 if(tapCount>=5){
-
 document.getElementById("secretMessage").classList.add("showSecret")
-
 }
 
-})
+}
   
 </script>
 
 </body>
 </html>
+
 
 
 
