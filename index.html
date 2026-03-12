@@ -2,9 +2,12 @@
 <html>
 <head>
 <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4d6d">
+<link rel="apple-touch-icon" href="icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WELCOME 🤗</title>
 
+  
 <style>
 
 body{
@@ -614,21 +617,12 @@ deferredPrompt = null
 
 })
 
-if ("serviceWorker" in navigator) {
-
-window.addEventListener("load", () => {
-
-navigator.serviceWorker
-.register("service-worker.js")
-.then((registration) => {
-console.log("Service Worker Registered:", registration)
-})
-.catch((error) => {
-console.log("Service Worker Registration Failed:", error)
-})
-
-})
-
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(reg => console.log("Service Worker Registered"))
+    .catch(err => console.log("Service Worker Failed", err))
+  })
 }
 
 
@@ -637,6 +631,7 @@ console.log("Service Worker Registration Failed:", error)
 
 </body>
 </html>
+
 
 
 
