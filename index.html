@@ -158,6 +158,18 @@ opacity:1;
 background:#444;
 }
 
+#tapBtn{
+animation:shake 2s infinite;
+}
+
+@keyframes shake{
+0%{transform:translateX(0)}
+25%{transform:translateX(-2px)}
+50%{transform:translateX(2px)}
+75%{transform:translateX(-2px)}
+100%{transform:translateX(0)}
+}
+  
 </style>
 </head>
 
@@ -206,6 +218,7 @@ background:#444;
 
 <h1>Ram ❤️ Krushitha Forever</h1>
 <h3 id="loveTimer"></h3>
+<button id="tapBtn">Tap me more… 💖</button>
 
 <h2 id="secretMessage" class="hiddenSecret">
 💍 Krushitha… one day this will not be a website.
@@ -370,14 +383,23 @@ document.getElementById("loveTimer").innerHTML=
 
 /* secret tap */
 
-let tapCount=0
+let tapCount = 0
 
-document.addEventListener("click",()=>{
-if(document.getElementById("celebration").classList.contains("hidden")) return
+const tapBtn = document.getElementById("tapBtn")
+
+tapBtn.addEventListener("click",()=>{
+
 tapCount++
-if(tapCount>=5){
+
+if(tapCount < 5){
+tapBtn.innerText = "Tap me " + (5 - tapCount) + " more times 💖"
+}
+
+if(tapCount >= 5){
+tapBtn.style.display="none"
 document.getElementById("secretMessage").classList.add("showSecret")
 }
+
 })
 
 /* fireworks */
@@ -525,3 +547,4 @@ noBtn.style.top=y+"px"
 
 </body>
 </html>
+
