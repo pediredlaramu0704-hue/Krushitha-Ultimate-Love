@@ -123,7 +123,7 @@ z-index:1;
 }
 
 #heartSky{
-z-index:0;
+z-index:3;
 }
 
 .heart{
@@ -490,6 +490,7 @@ let y=heartCanvas.height/3
 
 heartCtx.font="bold "+size+"px Arial"
 heartCtx.fillStyle="white"
+heartCtx.fillText(text,x,y)
 
 const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
 
@@ -574,6 +575,7 @@ animateHeartSky()
 const noBtn=document.getElementById("noBtn")
 
 noBtn.addEventListener("mouseover",moveNoButton)
+noBtn.addEventListener("touchstart",moveNoButton)
 
 function moveNoButton(){
 
