@@ -123,7 +123,7 @@ z-index:1;
 }
 
 #heartSky{
-z-index:3;
+z-index:4;
 }
 
 .heart{
@@ -208,7 +208,7 @@ z-index:9999;
 <div class="hearts"></div>
 
 <div id="intro" class="screen hidden">
-<h1>An Incomplete Love Story</h1>
+<h1>Incomplete Love</h1>
 <h2>Ram ❤️ Krushitha</h2>
 <button onclick="startCountdown()">Start</button>
 <button id="installBtn" style="display:none">Install App ❤️</button> 
@@ -219,7 +219,7 @@ z-index:9999;
 </div>
 
 <div id="story" class="screen hidden">
-<h1>Our Love Story</h1>
+<h1>My Love Story</h1>
 <p id="message"></p>
 
 <div id="slideshow">
@@ -486,7 +486,7 @@ let size = Math.min(heartCanvas.width/4,120)
 let textWidth=heartCtx.measureText(text).width
 
 let x=(heartCanvas.width-textWidth)/2
-let y=heartCanvas.height/3
+let y=heartCanvas.height/4
 
 heartCtx.font="bold "+size+"px Arial"
 heartCtx.fillStyle="white"
