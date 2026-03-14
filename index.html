@@ -479,14 +479,16 @@ function createHeartName(){
 
 const text="KRUSHITHA"
 
-let size = Math.min(heartCanvas.width/4,120)
-let textWidth=heartCtx.measureText(text).width
-
-let x=(heartCanvas.width-textWidth)/2
-let y=heartCanvas.height/4
+let size = Math.min(heartCanvas.width/5,100)
 
 heartCtx.font="bold "+size+"px Arial"
 heartCtx.fillStyle="white"
+
+let textWidth = heartCtx.measureText(text).width
+
+let x=(heartCanvas.width-textWidth)/2
+let y=heartCanvas.height/3
+
 heartCtx.fillText(text,x,y)
 
 const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
