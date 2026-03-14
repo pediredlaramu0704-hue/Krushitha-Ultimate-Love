@@ -123,7 +123,7 @@ z-index:1;
 }
 
 #heartSky{
-z-index:3;
+z-index:0;
 }
 
 .heart{
@@ -483,13 +483,13 @@ function createHeartName(){
 const text="KRUSHITHA"
 
 let size = Math.min(heartCanvas.width/4,120)
-heartCtx.font="bold "+size+"px Arial"
 let textWidth=heartCtx.measureText(text).width
 
 let x=(heartCanvas.width-textWidth)/2
 let y=heartCanvas.height/3
 
-heartCtx.fillText(text,x,y)
+heartCtx.font="bold "+size+"px Arial"
+heartCtx.fillStyle="white"
 
 const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
 
@@ -523,6 +523,9 @@ canvas.height=window.innerHeight
 
 heartCanvas.width=window.innerWidth
 heartCanvas.height=window.innerHeight
+
+heartParticles=[]
+createHeartName()
 
 })
 
