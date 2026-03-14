@@ -119,6 +119,11 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
+z-index:1;
+}
+
+#heartSky{
+z-index:3;
 }
 
 .heart{
@@ -141,6 +146,10 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
+}
+
+#fireworksCanvas{
+z-index:2;
 }
 
 .hiddenSecret{
@@ -198,7 +207,7 @@ z-index:9999;
 
 <div class="hearts"></div>
 
-<div id="intro" class="screen">
+<div id="intro" class="screen hidden">
 <h1>An Incomplete Love Story</h1>
 <h2>Ram ❤️ Krushitha</h2>
 <button onclick="startCountdown()">Start</button>
@@ -251,8 +260,8 @@ z-index:9999;
 
 setTimeout(()=>{
 document.getElementById("netflixIntro").style.display="none"
+document.getElementById("intro").classList.remove("hidden")
 },3000)
-
 /* Countdown */
 
 function startCountdown(){
@@ -473,11 +482,12 @@ function createHeartName(){
 
 const text="KRUSHITHA"
 
-heartCtx.font="bold 100px Arial"
+let size = Math.min(heartCanvas.width/4,120)
+heartCtx.font="bold "+size+"px Arial"
 let textWidth=heartCtx.measureText(text).width
 
 let x=(heartCanvas.width-textWidth)/2
-let y=heartCanvas.height/4
+let y=heartCanvas.height/3
 
 heartCtx.fillText(text,x,y)
 
@@ -505,6 +515,16 @@ ty:py
 }
 
 }
+
+window.addEventListener("resize",()=>{
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+heartCanvas.width=window.innerWidth
+heartCanvas.height=window.innerHeight
+
+})
 
 function animateHeartSky(){
 
