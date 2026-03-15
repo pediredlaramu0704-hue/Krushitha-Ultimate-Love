@@ -131,6 +131,11 @@ z-index:1;
 }
 
 
+#celebration h1{
+position:relative;
+z-index:2;
+  }
+
 .heart{
 position:absolute;
 color:Pink;
@@ -158,15 +163,6 @@ top:0;
 left:0;
 z-index:10;
 pointer-events:none;
-}
-
-
-#fireworksCanvas{
-z-index:2;
-}
-
-#heartSky{
-z-index:1;
 }
 
 .hiddenSecret{
@@ -553,6 +549,8 @@ createHeartName()
 function animateHeartSky(){
 
 heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+heartCtx.shadowColor="red"
+heartCtx.shadowBlur=15
 
 heartParticles.forEach(p=>{
 p.x+=(p.tx-p.x)*0.05
