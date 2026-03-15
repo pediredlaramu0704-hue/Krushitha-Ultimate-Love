@@ -79,6 +79,14 @@ justify-content:center;
 align-items:center;
 }
 
+#celebration h1,
+#celebration h3,
+#celebration button,
+#secretMessage{
+position:relative;
+z-index:10;
+}
+
 .hidden{
 display:none;
 }
@@ -146,11 +154,11 @@ pointer-events:none;
 }
 
 #fireworksCanvas{
-z-index:3;
+z-index:2;
 }
 
 #heartSky{
-z-index:4;
+z-index:1;
 }
 
 .hiddenSecret{
@@ -498,6 +506,7 @@ heartCtx.fillText(text,x,y)
 const imageData=heartCtx.getImageData(0,0,heartCanvas.width,heartCanvas.height)
 
 heartCtx.clearRect(0,0,heartCanvas.width,heartCanvas.height)
+heartCtx.globalCompositeOperation="source-over"
 
 for(let py=0;py<imageData.height;py+=6){
 for(let px=0;px<imageData.width;px+=6){
