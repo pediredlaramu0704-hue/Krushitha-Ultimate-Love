@@ -119,13 +119,13 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
-z-index:0;
+z-index:1;
 }
 
 
 .heart{
 position:absolute;
-color:red;
+color:Pink;
 animation:float 5s linear infinite;
 }
 
@@ -544,9 +544,11 @@ heartCtx.font="16px Arial"
 heartCtx.fillText("❤️",p.x,p.y)
 })
 
-if(!heartStart) heartStart=Date.now()
+if(heartStart === null){
+heartStart = Date.now()
+}
 
-if(Date.now()-heartStart>5000 && !exploded){
+if(Date.now() - heartStart > 5000 && exploded === false){
 
 exploded=true
 
@@ -569,8 +571,14 @@ requestAnimationFrame(animateHeartSky)
 }
 
 function startHeartSky(){
+
+heartParticles = []
+heartStart = null
+exploded = false
+
 createHeartName()
 animateHeartSky()
+
 }
 
 /* run away no button */
