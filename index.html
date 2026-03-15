@@ -149,6 +149,10 @@ pointer-events:none;
 z-index:3;
 }
 
+#heartSky{
+z-index:4;
+}
+
 .hiddenSecret{
 opacity:0;
 transition:opacity 2s;
@@ -645,7 +649,7 @@ deferredPrompt = null
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js')
+    navigator.serviceWorker.register('./service-worker.js')
     .then(reg => console.log("Service Worker Registered"))
     .catch(err => console.log("Service Worker Failed", err))
   })
